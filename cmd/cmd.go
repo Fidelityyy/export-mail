@@ -14,7 +14,7 @@ import (
 	"time"
 
 	"github.com/alecthomas/kong"
-	"github.com/antonfisher/nested-logrus-formatter"
+	formatter "github.com/antonfisher/nested-logrus-formatter"
 	"github.com/dustin/go-humanize"
 	"github.com/emersion/go-message"
 	"github.com/knadh/go-pop3"
@@ -245,7 +245,7 @@ func name(msg *message.Entity) string {
 	}
 	subj = maxLen(subj, 30)
 
-	return safetyName(fmt.Sprintf("[%s][%s][%s][%s]", from, date, msd, subj))
+	return safetyName(fmt.Sprintf("%s-[%s][%s][%s]", date, from, subj, msd))
 }
 func date(msg *message.Entity) (t time.Time) {
 	p, err := mail.ParseDate(msg.Header.Get("Date"))
